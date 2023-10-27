@@ -2,15 +2,16 @@ class Ship
   attr_reader :name,
               :length,
               :health
+  attr_accessor :hits
   def initialize(name, length)
     @name = name
     @length = length
     @health = length
-    @hit = 0
+    @hits = 0
   end
 
   def hit
-    @hit += 1
+    @hits += 1
     @length -= 1
     @health -= 1
   end
