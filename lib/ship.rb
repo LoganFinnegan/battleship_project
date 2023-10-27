@@ -12,4 +12,8 @@ class Ship
   def health
     @health = @length - @hit
   end
+
+  def hit
+    @hit += 1
+  end
 end
