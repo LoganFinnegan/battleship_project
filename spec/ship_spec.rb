@@ -1,13 +1,13 @@
 require './lib/ship'
 
 RSpec.describe Ship do
-  it 'exists' do
+  it "exists" do
     cruiser = Ship.new("Cruiser", 3)
 
     expect(cruiser).to be_a(Ship)
   end
 
-  it 'has readable attributes' do
+  it "has readable attributes" do
     cruiser = Ship.new("Cruiser", 3)
 
     expect(cruiser.name).to eq("Cruiser")
@@ -19,5 +19,13 @@ RSpec.describe Ship do
     cruiser = Ship.new("Cruiser", 3)
 
    expect(cruiser.sunk?).to eq(false)
+  end
+
+  it "checks for hits" do
+    cruiser = Ship.new("Cruiser", 3)
+
+    cruiser.hit
+
+    expect(cruiser.health).to eq(2)
   end
 end
