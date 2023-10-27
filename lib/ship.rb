@@ -4,5 +4,12 @@ class Ship
   def initialize(name, length)
     @name = name
     @length = length
+    @health = 0
+    @hit = 0
+
+  end
+
+  def health
+    @health = @length - @hit
   end
 end
