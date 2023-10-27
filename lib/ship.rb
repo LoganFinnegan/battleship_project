@@ -7,9 +7,7 @@ class Ship
     @length = length
     @health = length
     @hit = 0
-
   end
-
 
   def hit
     @hit += 1
