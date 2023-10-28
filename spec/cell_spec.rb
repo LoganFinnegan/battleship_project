@@ -20,6 +20,18 @@ RSpec.describe Cell do
     expect(cell.ship).to eq(nil)
   end
 
+
+  it "checks if cruiser has sunk" do
+    cell = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+    expect(cruiser.sunk?).to eq(false)
+    cruiser.hit
+    cruiser.hit
+    cruiser.hit
+    expect(cruiser.sunk?).to eq(true)
+  end
+
   it "has an empty? method that checks if cell is empty" do
     cell = Cell.new("B4")
 
@@ -55,42 +67,28 @@ RSpec.describe Cell do
     expect(cell.fired_upon?).to be true
   end
 
-  describe "#render" do
-    it "exists" do
+    it "can render the coordinate for the board" do
       cell_1 = Cell.new("B4")
-      cell_2 = Cell.new("C3")
 
-      expect(cell_1).to be_a(Cell)
-      expect(cell_2).to be_a(Cell)
-    end
-
-    it "returns cell status"
-      cell_1 = Cell.new("B4")
-      cell_2 = Cell.new("C3")
-      cruiser = Ship.new("Cruiser", 3
-      
-      expect(cell_1).to eq(".")
-
+      expect(cell_1.render).to eq('.')
       cell_1.fire_upon
+      expect(cell_1.render).to eq('M')
 
-      expect(cell_1).to eq("M")
+      cell_2 = Cell.new("C3")
+      cruiser = Ship.new("Cruiser", 3)
 
       cell_2.place_ship(cruiser)
-
-      expect(cell_2.render).to eq(".")
-
-      expect(cell_2.render(true)).to eq("S")
+      expect(cell_2.render).to eq('.')
+      expect(cell_2.render(true)).to eq('S')
 
       cell_2.fire_upon
-
-      expect(cell_2.render).to eq("H")
-      expect(cruiser.sunk?).to eq(false)
+      expect(cell_2.render).to eq('H')
+      expect(cruiser.sunk?).to be false
 
       cruiser.hit
       cruiser.hit
-
-      expect(cruiser.sunk?).to eq(true)
-      expect(cell_2.render).to eq("X")
+      
+      expect(cruiser.sunk?).to be true
+      expect(cell_2.render).to eq('X')
     end
   end
-end
