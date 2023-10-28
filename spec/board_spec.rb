@@ -9,9 +9,9 @@ RSpec.describe Board do
     expect(board).to be_a(Board)
   end
 
-  it "has a hash of 16 cells 4x4" do
+  it "can create a hash of 16 cells 4x4" do
     board = Board.new
-
+    
     expect(board.cells).to be_a(Hash)
   end
 end
