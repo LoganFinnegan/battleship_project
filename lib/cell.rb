@@ -1,7 +1,8 @@
 
 class Cell
-  attr_reader :coordinate,
-              :ship
+  attr_reader :ship
+
+  attr_accessor :coordinate
 
 
   def initialize(coordinate)
@@ -54,9 +55,9 @@ class Cell
       @coordinate = 'M'
     elsif default == true
       @coordinate = 'S'
-    elsif @ship != nil && @ship.health < 3 && @ship.health > 0
+    elsif @ship != nil && @ship.health < @ship.length && @ship.health > 0
       @coordinate = 'H'
-    elsif @ship == !nil && @ship.health == 0 && @coordinate == 'X' || @coordinate == 'H'
+    elsif @ship == !nil && @ship.health == 0 && (@coordinate == 'X' || @coordinate == 'H')
       @coordinate = 'X'
     else
       @coordinate = '.'
