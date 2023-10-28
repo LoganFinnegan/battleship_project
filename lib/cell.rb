@@ -29,6 +29,25 @@ class Cell
   end
 
   def fire_upon
-    @ship.hit
+    if @ship != nil && @ship.health > 0
+      @ship.hit
+      @coordinate = 'H'
+    elsif @ship == nil
+      @coordinate = 'M'
+    end
+  end
+
+  def render(default = false)
+    if @ship == nil && @coordinate == 'M'
+      @coordinate = 'M'
+    elsif default == true
+      @coordinate = 'S'
+    elsif @ship != nil && @ship.health < 3 && @ship.health > 0
+      @coordinate = 'H'
+    elsif @health == 0 && @hits == 3 && @coordinate == 'H'
+      @coordinate = 'X'
+    else
+      @coordinate = '.'
+    end
   end
 end
