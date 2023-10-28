@@ -57,7 +57,7 @@ class Cell
       @coordinate = 'S'
     elsif @ship != nil && @ship.health < @ship.length && @ship.health > 0
       @coordinate = 'H'
-    elsif @ship == !nil && @ship.health == 0 && (@coordinate == 'X' || @coordinate == 'H')
+    elsif @ship == !nil && @ship.health == 0 && @coordinate == 'X' || @coordinate == 'H'
       @coordinate = 'X'
     else
       @coordinate = '.'
