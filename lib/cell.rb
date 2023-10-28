@@ -3,9 +3,18 @@ class Cell
   attr_reader :coordinate,
               :ship
 
+
   def initialize(coordinate)
     @coordinate = coordinate
     ship = nil
+  end
+
+  def sunk?
+    if @health <= 0
+      true
+    else
+      false
+    end
   end
 
   def empty?
@@ -21,9 +30,9 @@ class Cell
   end
 
   def fired_upon?
-    if @ship.hits > 0
+    if @coordinate == 'M' || @coordinate == 'H' || @coordinate == 'X'
       true
-    else
+    else @coordinate == '.' || @coordinate == 'S'
       false
     end
   end
@@ -34,6 +43,9 @@ class Cell
       @coordinate = 'H'
     elsif @ship == nil
       @coordinate = 'M'
+    elsif @ship != nil && @ship.health <= 1
+      @ship.hit
+      @coordinate = 'X'
     end
   end
 
@@ -44,7 +56,7 @@ class Cell
       @coordinate = 'S'
     elsif @ship != nil && @ship.health < 3 && @ship.health > 0
       @coordinate = 'H'
-    elsif @health == 0 && @hits == 3 && @coordinate == 'H'
+    elsif @ship == !nil && @ship.health == 0 && @coordinate == 'X' || @coordinate == 'H'
       @coordinate = 'X'
     else
       @coordinate = '.'

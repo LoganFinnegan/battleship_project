@@ -20,6 +20,18 @@ RSpec.describe Cell do
     expect(cell.ship).to eq(nil)
   end
 
+
+  it "checks if cruiser has sunk" do
+    cell = Cell.new("B4")
+    cruiser = Ship.new("Cruiser", 3)
+    cell.place_ship(cruiser)
+    expect(cruiser.sunk?).to eq(false)
+    cruiser.hit
+    cruiser.hit
+    cruiser.hit
+    expect(cruiser.sunk?).to eq(true)
+  end
+
   it "has an empty? method that checks if cell is empty" do
     cell = Cell.new("B4")
 
