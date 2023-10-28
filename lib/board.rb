@@ -1,13 +1,58 @@
 class Board
+attr_reader :cells
   def initialize
-    @c_hash = {}
+    @cells = create_cells
   end
 
-  def cells
-    @c_hash = {
-    @c_hash['A1'] => Cell.new('A1'), @c_hash['A2'] => Cell.new('A2'), @c_hash['A3'] => Cell.new('A3'), @c_hash['A4'] => Cell.new('A4'),
-    @c_hash['B1'] => Cell.new('B1'), @c_hash['B2'] => Cell.new('B2'), @c_hash['B3'] => Cell.new('B3'), @c_hash['B4'] => Cell.new('B4'),
-    @c_hash['C1'] => Cell.new('C1'), @c_hash['C2'] => Cell.new('C2'), @c_hash['C3'] => Cell.new('C3'), @c_hash['C4'] => Cell.new('C4'),
-    @c_hash['D1'] => Cell.new('D1'), @c_hash['D2'] => Cell.new('D2'), @c_hash['D3'] => Cell.new('D3'), @c_hash['D4'] => Cell.new('D4')}
+  def create_cells
+    coords = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4',
+    'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4']
+    coords.each_with_object({}) do |coord, hash|
+      hash[coord] = Cell.new(coord)
+    end
+  end
+
+  def valid_coordinate?(coordinate)
+      @cells.keys.include?(coordinate)
+  end
+
+  def valid_placement?(ship, coordinates)
+    same_length?(ship, coordinates) &&
+    (vertical?(coordinates) || horizontal?(coordinates))
+  end
+
+  def same_length?(ship, coordinates)
+    ship.length == coordinates.count
+  end
+
+  def vertical?(coords)
+    #same letter and consecutive numbers
+    letter_count = coords.map do |coord|
+      coord[0]
+    end.uniq.count
+    
+
+    nums = coords.map do |coord|
+      coord[1]
+    end
+
+    range = (nums[0]..nums[-1]).to_a
+
+    (letter_count == 1) && (nums == range)
+  end
+
+  def horizontal?(coords)
+    #
+    number_count = coords.map do |coord|
+      coord[1]
+    end.uniq.count
+
+    letters = coords.map do |coord|
+      coord[0]
+    end
+
+    range = (letters[0]..letters[-1]).to_a
+
+    (number_count == 1) && (letters == range)
   end
 end
