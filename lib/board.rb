@@ -21,7 +21,7 @@ attr_reader :cells
     (vertical?(coordinates) || horizontal?(coordinates)) &&
     (overlap?(coordinates) == false)
   end
-  #check this for understanding:
+  #check that coordinates requested for placement are empty
   def overlap?(coordinates)
     coordinates.one? {|coordinate| @cells[coordinate].empty?}
   end
