@@ -49,6 +49,13 @@ RSpec.describe Board do
         expect(@board.valid_placement?(@submarine, ["C2", "D3"])).to eq(false)
       end
 
+      it "can't overlap other ship" do
+        @board.place(@cruiser, ["A1", "A2", "A3"])
+
+        expect(@board.overlap?(["A1", "B1"])).to be true
+        expect(@board.valid_placement?(@submarine, ["A1", "B1"])).to be false
+      end
+
       it "has valid placement" do
         expect(@board.valid_placement?(@submarine, ["A1", "A2"])).to eq(true)
         expect(@board.valid_placement?(@cruiser, ["B1", "C1", "D1"])).to eq(true)
@@ -63,7 +70,7 @@ RSpec.describe Board do
     cell_1 = board.cells["A1"]
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
-    require 'pry'; binding.pry
+
     expect(cell_3.ship).to eq(cell_2.ship)
   end
 end
