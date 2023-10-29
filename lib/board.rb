@@ -30,7 +30,7 @@ attr_reader :cells
     letter_count = coords.map do |coord|
       coord[0]
     end.uniq.count
-    
+
 
     nums = coords.map do |coord|
       coord[1]
@@ -54,5 +54,21 @@ attr_reader :cells
     range = (letters[0]..letters[-1]).to_a
 
     (number_count == 1) && (letters == range)
+  end
+
+  def place(ship_name, coord_arry)
+    if ship_name.length == 2
+      @cells[coord_arry[0]].ship = ship_name
+      @cells[coord_arry[1]].ship = ship_name
+      coord_arry[0] = @cells[coord_arry[0]]
+      coord_arry[1] = @cells[coord_arry[1]]
+    elsif ship_name.length == 3
+      @cells[coord_arry[0]].ship = ship_name
+      @cells[coord_arry[1]].ship = ship_name
+      @cells[coord_arry[2]].ship = ship_name
+      coord_arry[0] = @cells[coord_arry[0]]
+      coord_arry[1] = @cells[coord_arry[1]]
+      coord_arry[2] = @cells[coord_arry[2]]
+    end
   end
 end
