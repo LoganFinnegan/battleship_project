@@ -18,7 +18,12 @@ attr_reader :cells
 
   def valid_placement?(ship, coordinates)
     same_length?(ship, coordinates) &&
-    (vertical?(coordinates) || horizontal?(coordinates))
+    (vertical?(coordinates) || horizontal?(coordinates)) &&
+    (overlap?(coordinates) == false)
+  end
+  #check that coordinates requested for placement are empty
+  def overlap?(coordinates)
+    coordinates.one? {|coordinate| @cells[coordinate].empty?}
   end
 
   def same_length?(ship, coordinates)
@@ -60,15 +65,15 @@ attr_reader :cells
     if ship_name.length == 2
       @cells[coord_arry[0]].ship = ship_name
       @cells[coord_arry[1]].ship = ship_name
-      coord_arry[0] = @cells[coord_arry[0]]
-      coord_arry[1] = @cells[coord_arry[1]]
+      # coord_arry[0] == @cells[coord_arry[0]]
+      # coord_arry[1] == @cells[coord_arry[1]]
     elsif ship_name.length == 3
       @cells[coord_arry[0]].ship = ship_name
       @cells[coord_arry[1]].ship = ship_name
       @cells[coord_arry[2]].ship = ship_name
-      coord_arry[0] = @cells[coord_arry[0]]
-      coord_arry[1] = @cells[coord_arry[1]]
-      coord_arry[2] = @cells[coord_arry[2]]
+      # coord_arry[0] == @cells[coord_arry[0]]
+      # coord_arry[1] == @cells[coord_arry[1]]
+      # coord_arry[2] == @cells[coord_arry[2]]
     end
   end
 end
