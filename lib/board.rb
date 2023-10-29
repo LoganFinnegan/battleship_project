@@ -30,7 +30,7 @@ attr_reader :cells
     letter_count = coords.map do |coord|
       coord[0]
     end.uniq.count
-    
+
 
     nums = coords.map do |coord|
       coord[1]

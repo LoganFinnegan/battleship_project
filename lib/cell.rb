@@ -63,15 +63,4 @@ class Cell
       @coordinate = '.'
     end
   end
-
-  def render
-      if @coordinate.empty? && @coordinate.fire_upon == false
-        print "M"
-      elsif if @ship != nil
-        print "H"
-      else
-        print "."
-      end
-    end
-  end
 end
