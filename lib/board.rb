@@ -85,52 +85,52 @@ attr_reader :cells
     row5 = " "
     @cells.each do |k, v|
       if k[0] == "A"
-        if v.ship == nil && v.coordinate == 'M '
+        if v.ship == nil && v.fired_upon? == true
           v.coordinate = 'M '
+        elsif v.ship != nil && v.fired_upon? == true && v.ship.health > 0
+          v.coordinate = 'H '
         elsif default == true && v.ship != nil
           v.coordinate = 'S '
-        elsif v.ship != nil && v.ship.health < v.ship.length && v.ship.health > 0
-          v.coordinate = 'H '
-        elsif v.ship == !nil && v.ship.health == 0 && v.coordinate == 'X ' || v.coordinate == 'H '
+        elsif v.ship == !nil && v.ship.health == 0 && fire_upon? == true
           v.coordinate = 'X '
         else
           v.coordinate = '. '
         end
       row2 = row2 + v.coordinate
       elsif k[0] == "B"
-        if v.ship == nil && v.coordinate == 'M '
+        if v.ship == nil && v.fired_upon? == true
           v.coordinate = 'M '
+        elsif v.ship != nil && v.fired_upon? == true && v.ship.health > 0
+          v.coordinate = 'H '
         elsif default == true && v.ship != nil
           v.coordinate = 'S '
-        elsif v.ship != nil && v.ship.health < v.ship.length && v.ship.health > 0
-          v.coordinate = 'H '
-        elsif v.ship == !nil && v.ship.health == 0 && v.coordinate == 'X ' || v.coordinate == 'H '
+        elsif v.ship == !nil && v.ship.health == 0 && fire_upon? == true
           v.coordinate = 'X '
         else
           v.coordinate = '. '
         end
       row3 = row3 + v.coordinate
       elsif k[0] == "C"
-        if v.ship == nil && v.coordinate == 'M '
+        if v.ship == nil && v.fired_upon? == true
           v.coordinate = 'M '
-        elsif default == true && v.ship != nil
-          v.coordinate = 'S '
-        elsif v.ship != nil && v.ship.health < v.ship.length && v.ship.health > 0
+        elsif v.ship != nil && v.fired_upon? == true && v.ship.health > 0
           v.coordinate = 'H '
-        elsif v.ship == !nil && v.ship.health == 0 && v.coordinate == 'X ' || v.coordinate == 'H '
+        elsif default == true && v.ship != nil 
+          v.coordinate = 'S '
+        elsif v.ship == !nil && v.ship.health == 0 && fire_upon? == true
           v.coordinate = 'X '
         else
           v.coordinate = '. '
         end
       row4 = row4 + v.coordinate
       elsif k[0] == "D"
-        if v.ship == nil && v.coordinate == 'M '
+        if v.ship == nil && v.fired_upon? == true
           v.coordinate = 'M '
+        elsif v.ship != nil && v.fired_upon? == true && v.ship.health > 0
+          v.coordinate = 'H '
         elsif default == true && v.ship != nil
           v.coordinate = 'S '
-        elsif v.ship != nil && v.ship.health < v.ship.length && v.ship.health > 0
-          v.coordinate = 'H '
-        elsif v.ship == !nil && v.ship.health == 0 && v.coordinate == 'X ' || v.coordinate == 'H '
+        elsif v.ship == !nil && v.ship.health == 0 && fire_upon? == true
           v.coordinate = 'X '
         else
           v.coordinate = '. '
