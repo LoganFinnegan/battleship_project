@@ -76,4 +76,68 @@ attr_reader :cells
       # coord_arry[2] == @cells[coord_arry[2]]
     end
   end
+
+  def render(default = false)
+    row1 = "  1 2 3 4 \nA"
+    row2 = " "
+    row3 = " "
+    row4 = " "
+    row5 = " "
+    @cells.each do |k, v|
+      if k[0] == "A"
+        if v.ship == nil && v.coordinate == 'M '
+          v.coordinate = 'M '
+        elsif default == true && v.ship != nil
+          v.coordinate = 'S '
+        elsif v.ship != nil && v.ship.health < v.ship.length && v.ship.health > 0
+          v.coordinate = 'H '
+        elsif v.ship == !nil && v.ship.health == 0 && v.coordinate == 'X ' || v.coordinate == 'H '
+          v.coordinate = 'X '
+        else
+          v.coordinate = '. '
+        end
+      row2 = row2 + v.coordinate
+      elsif k[0] == "B"
+        if v.ship == nil && v.coordinate == 'M '
+          v.coordinate = 'M '
+        elsif default == true && v.ship != nil
+          v.coordinate = 'S '
+        elsif v.ship != nil && v.ship.health < v.ship.length && v.ship.health > 0
+          v.coordinate = 'H '
+        elsif v.ship == !nil && v.ship.health == 0 && v.coordinate == 'X ' || v.coordinate == 'H '
+          v.coordinate = 'X '
+        else
+          v.coordinate = '. '
+        end
+      row3 = row3 + v.coordinate
+      elsif k[0] == "C"
+        if v.ship == nil && v.coordinate == 'M '
+          v.coordinate = 'M '
+        elsif default == true && v.ship != nil
+          v.coordinate = 'S '
+        elsif v.ship != nil && v.ship.health < v.ship.length && v.ship.health > 0
+          v.coordinate = 'H '
+        elsif v.ship == !nil && v.ship.health == 0 && v.coordinate == 'X ' || v.coordinate == 'H '
+          v.coordinate = 'X '
+        else
+          v.coordinate = '. '
+        end
+      row4 = row4 + v.coordinate
+      elsif k[0] == "D"
+        if v.ship == nil && v.coordinate == 'M '
+          v.coordinate = 'M '
+        elsif default == true && v.ship != nil
+          v.coordinate = 'S '
+        elsif v.ship != nil && v.ship.health < v.ship.length && v.ship.health > 0
+          v.coordinate = 'H '
+        elsif v.ship == !nil && v.ship.health == 0 && v.coordinate == 'X ' || v.coordinate == 'H '
+          v.coordinate = 'X '
+        else
+          v.coordinate = '. '
+        end
+        row5 = row5 + v.coordinate
+      end
+    end
+    r_board = row1 + (row2 + "\nB") + (row3 + "\nC") + (row4 + "\nD") + (row5 + "\n")
+  end
 end
