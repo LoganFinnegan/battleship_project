@@ -62,10 +62,10 @@ class Cell
       "H"
     elsif @ship != nil && fired_upon? == true && @ship.sunk? == true
       "X"
-    elsif default == true && @ship != nil
+    elsif default == true && @ship != nil && @ship.sunk? == false
       "S"
       else
-        "."
+      "."
     end
   end
 end
