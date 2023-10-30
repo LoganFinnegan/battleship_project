@@ -89,9 +89,9 @@ attr_reader :cells
           v.coordinate = 'M '
         elsif v.ship != nil && v.fired_upon? == true && v.ship.health > 0
           v.coordinate = 'H '
-        elsif default == true && v.ship != nil
+        elsif default == true && v.ship != nil && v.fired_upon? == false
           v.coordinate = 'S '
-        elsif v.ship == !nil && v.ship.health == 0 && fire_upon? == true
+        elsif v.ship != nil && v.ship.health == 0 && v.fired_upon? == true
           v.coordinate = 'X '
         else
           v.coordinate = '. '
@@ -102,9 +102,9 @@ attr_reader :cells
           v.coordinate = 'M '
         elsif v.ship != nil && v.fired_upon? == true && v.ship.health > 0
           v.coordinate = 'H '
-        elsif default == true && v.ship != nil
+        elsif default == true && v.ship != nil && v.fired_upon? == false
           v.coordinate = 'S '
-        elsif v.ship == !nil && v.ship.health == 0 && fire_upon? == true
+        elsif v.ship != nil && v.ship.health == 0 && v.fired_upon? == true
           v.coordinate = 'X '
         else
           v.coordinate = '. '
@@ -115,9 +115,9 @@ attr_reader :cells
           v.coordinate = 'M '
         elsif v.ship != nil && v.fired_upon? == true && v.ship.health > 0
           v.coordinate = 'H '
-        elsif default == true && v.ship != nil 
+        elsif default == true && v.ship != nil && v.fired_upon? == false
           v.coordinate = 'S '
-        elsif v.ship == !nil && v.ship.health == 0 && fire_upon? == true
+        elsif v.ship != nil && v.ship.health == 0 && v.fired_upon? == true
           v.coordinate = 'X '
         else
           v.coordinate = '. '
@@ -128,9 +128,9 @@ attr_reader :cells
           v.coordinate = 'M '
         elsif v.ship != nil && v.fired_upon? == true && v.ship.health > 0
           v.coordinate = 'H '
-        elsif default == true && v.ship != nil
+        elsif default == true && v.ship != nil && v.fired_upon? == false
           v.coordinate = 'S '
-        elsif v.ship == !nil && v.ship.health == 0 && fire_upon? == true
+        elsif v.ship != nil && v.ship.health == 0 && v.fired_upon? == true
           v.coordinate = 'X '
         else
           v.coordinate = '. '
