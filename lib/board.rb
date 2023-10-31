@@ -19,11 +19,11 @@ attr_reader :cells
   def valid_placement?(ship, coordinates)
     same_length?(ship, coordinates) &&
     (vertical?(coordinates) || horizontal?(coordinates)) &&
-    (overlap?(coordinates) == false)
+    (overlap?(coordinates))
   end
   #check that coordinates requested for placement are empty
-  def overlap?(coordinates)
-    coordinates.one? {|coordinate| @cells[coordinate].empty?}
+  def overlap?(coordinates) #check this for understand
+    coordinates.all? {|coordinate| @cells[coordinate].empty?}
   end
 
   def same_length?(ship, coordinates)

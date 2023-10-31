@@ -4,6 +4,7 @@ class Ship
 
   attr_accessor :hits,
                 :health
+
   def initialize(name, length)
     @name = name
     @length = length
