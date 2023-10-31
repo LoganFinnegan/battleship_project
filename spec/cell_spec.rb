@@ -26,10 +26,11 @@ RSpec.describe Cell do
     cruiser = Ship.new("Cruiser", 3)
     cell.place_ship(cruiser)
     expect(cruiser.sunk?).to eq(false)
-    cruiser.hit
-    cruiser.hit
-    cruiser.hit
+    cell.fire_upon
+    cell.fire_upon
+    cell.fire_upon
     expect(cruiser.sunk?).to eq(true)
+
   end
 
   it "has an empty? method that checks if cell is empty" do
