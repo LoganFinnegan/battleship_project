@@ -20,12 +20,15 @@ class Game
   end
 
   def begin_game
-    puts "Welcome to BATTLESHIP"
-    puts "Enter p to play. Enter q to quit."
+    puts "+++++++++++++++++++++++++++++++++++++++++"
+    puts "Welcome to BATTLESHIP, Ahoy, Commander!!!"
+    puts "°º¤ø,..,ø¤º°`°º¤ø,.,ø¤°º¤ø,..,ø¤º°`°º¤ø,."
+    puts " ><>  ><>  ><>  ><>   ><>  ><>  ><>  ><> "
+    puts "    Enter p to play. Enter q to quit.    "
     input = gets.chomp.downcase
     if input == "p"
-      puts "Ready your forces, Commander."
-      sleep(0)
+      puts "Ready your forces, Commander, Gah-Yarrr!"
+      sleep(1)
       setup
     elsif input == "q"
       puts "See you next time, Commander!"
@@ -40,23 +43,32 @@ class Game
     npc_place_ship(@npc_submarine)
     npc_place_ship(@npc_cruiser)
     prompt_player
-    print @player_board.render
+    print @player_board.render(true)
     player_place_ship(@player_submarine)
     player_place_ship(@player_cruiser)
-    print @player_board.render
+    print @player_board.render(true)
     until @player_cruiser.sunk? && @player_submarine.sunk? || npc_cruiser.sunk? && npc_submarine.sunk?
     puts "Enemy fire incoming!!!"
+    puts "~~~~~~~~~~~~~~~~~~~~~~"
     sleep(2)
     npc_fire
-    print @player_board.render
+    print @player_board.render(true)
+    sleep(1)
     puts "Player turn now, awaiting coordinate!"
+    puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     player_fire
     print @npc_board.render
     end
     if @player_cruiser.sunk? && @player_submarine.sunk?
-      puts "Game Over. YOU! LOSE!!!"
+      puts "Game Over.. YOU LOSE!!!"
+      puts "=X=X=X=X=X=X=X=X=X=X=X="
+      puts "X=X=X=X=X=X=X=X=X=X=X=X"
+      puts "=X=X=X=X=X=X=X=X=X=X=X="
     else
       puts "COMMANDER! YOU HAVE WON THE BATTLE!!!"
+      puts "====================================="
+      puts "====================================="
+      puts "====================================="
     end
     begin_game
   end
@@ -102,7 +114,7 @@ class Game
   end
 
   def prompt_player
-    puts "I have laid out my ships on the grid.\nYou now need to lay out your two ships.\nThe Cruiser is three units long and the Submarine is two units long.\n"
+    puts "Enemy ships be lurking abouts.\nPick your two finest ships from the fleet.\nThe Cruiser is three units long and the Submarine is two units long.\n"
   end
 
   def player_place_ship(ship)
