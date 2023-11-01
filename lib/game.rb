@@ -22,14 +22,15 @@ class Game
 
   def begin_game
     puts "+++++++++++++++++++++++++++++++++++++++++"#.yellow
-    puts "Welcome to BATTLESHIP, Ahoy, Commander!!!"#.red
-    puts "°º¤ø,..,ø¤º°`°º¤ø,.,ø¤°º¤ø,..,ø¤º°`°º¤ø,."#.blue
-    puts " ><>  ><>  ><>  ><>   ><>  ><>  ><>  ><> "#.grey
     puts "    Enter p to play. Enter q to quit.    "
     input = gets.chomp.downcase
     if input == "p"
-      puts "Ready your forces, Commander, Gah-Yarrr!"#.red
-      sleep(1)
+      puts "Welcome to BATTLESHIP, Ahoy, Commander!!!"#.red
+      puts "°º¤ø,..,ø¤º°`°º¤ø,.,ø¤°º¤ø,..,ø¤º°`°º¤ø,."#.blue
+      puts " ><>  ><>  ><>  ><>   ><>  ><>  ><>  ><> "#.grey
+      sleep(0.5)
+      puts "------Ready your forces, Commander!------"#.red
+      sleep(0.5)
       setup
     elsif input == "q"
       puts "See you next time, Commander!"#.red
@@ -42,9 +43,13 @@ class Game
 
   def setup
     @player_board = Board.new
-    @computer_board = Board.new
+    @npc_board = Board.new
     @player_board.create_cells
-    @computer_board.create_cells
+    @npc_board.create_cells
+    @player_cruiser   = Ship.new("cruiser", 3)
+    @npc_cruiser      = Ship.new("cruiser", 3)
+    @player_submarine = Ship.new("submarine", 2)
+    @npc_submarine    = Ship.new("submarine", 2)
     npc_place_ship(@npc_submarine)
     npc_place_ship(@npc_cruiser)
     prompt_player
