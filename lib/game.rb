@@ -1,7 +1,7 @@
 require './lib/ship'
 require './lib/cell'
 require './lib/board'
-#require 'colorize' #(gem install colorize)
+# require 'colorize' #(gem install colorize)
 
 class Game
   attr_reader :player_board,
@@ -77,7 +77,7 @@ class Game
       puts "X=X=X=X=X=X=X=X=X=X=X=X"#.red
       puts "=X=X=X=X=X=X=X=X=X=X=X="#.red
     else
-      puts "COMMANDER! YOU HAVE WON THE BATTLE!!!"#.red
+      puts "COMMANDER! YOU HAVE WON THE BATTLE!!!".red
       print @npc_board.render
       puts "====================================="#.green
       puts "====================================="#.green
