@@ -8,7 +8,7 @@ attr_reader :cells
     coords = ['A1', 'A2', 'A3', 'A4', 'B1', 'B2', 'B3', 'B4',
     'C1', 'C2', 'C3', 'C4', 'D1', 'D2', 'D3', 'D4']
     coords.each_with_object({}) do |coord, hash|
-      hash[coord] = Cell.new(coord)
+      hash[coord] = Cell.new(coord) 
     end
   end
 
@@ -22,7 +22,7 @@ attr_reader :cells
     (overlap?(coordinates))
   end
   #check that coordinates requested for placement are empty
-  def overlap?(coordinates) #check this for understand
+  def overlap?(coordinates)
     coordinates.all? {|coordinate| @cells[coordinate].empty?}
   end
 

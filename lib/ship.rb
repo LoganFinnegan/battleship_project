@@ -14,7 +14,6 @@ class Ship
 
   def hit
     @hits += 1
-    # @length -= 1
     @health -= 1
   end
 
