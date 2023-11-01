@@ -56,16 +56,19 @@ class Game
     sleep(1)
     puts "Player turn now, awaiting coordinate!"
     puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    player_fire
+    sleep(0.5)
     print @npc_board.render
+    player_fire
     end
     if @player_cruiser.sunk? && @player_submarine.sunk?
       puts "Game Over.. YOU LOSE!!!"
+      print @player_board.render
       puts "=X=X=X=X=X=X=X=X=X=X=X="
       puts "X=X=X=X=X=X=X=X=X=X=X=X"
       puts "=X=X=X=X=X=X=X=X=X=X=X="
     else
       puts "COMMANDER! YOU HAVE WON THE BATTLE!!!"
+      print @npc_board.render
       puts "====================================="
       puts "====================================="
       puts "====================================="
@@ -75,7 +78,7 @@ class Game
 
   def player_fire
     input = gets.chomp.upcase
-    if @npc_board.cells.keys.include?(input)
+    if @npc_board.cells.keys.include?(input) && @npc_board.cells[input].fired_upon? == false
       @npc_board.cells[input].fire_upon
       if @npc_board.cells[input].empty?
         puts "\nFire again, my liege! You have missed the target."
@@ -84,6 +87,9 @@ class Game
       elsif !@npc_board.cells[input].ship.sunk? && !@npc_board.cells[input].empty?
         puts "\nYou have struck an enemy ship!"
       end
+    elsif @npc_board.cells.keys.include?(input) && @npc_board.cells[input].fired_upon? == true
+      puts "\nYou have already fired upon that coordinate, my liege! Try again."
+      player_fire
     else
       puts "Invalid coordinate, Sir."
       player_fire
@@ -120,7 +126,7 @@ class Game
   def player_place_ship(ship)
     puts "Enter the squares for the #{ship.name} (#{ship.length} spaces):"
     input = gets.chomp.upcase.split(' ')
-    until @player_board.valid_placement?(ship, input)
+    until @player_board.valid_placement?(ship, input) #&& @npc_board.cells.keys.include?(input)
       puts "Invalid entry. Please try again."
       input = gets.chomp.upcase.split(' ')
     end
