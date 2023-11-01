@@ -26,7 +26,7 @@ class Game
     if input == "p"
       puts "Ready your forces, Commander."
       sleep(0)
-      play
+      setup
     elsif input == "q"
       puts "See you next time, Commander!"
       exit
@@ -36,13 +36,61 @@ class Game
     end
   end
 
-  def play
+  def setup
     npc_place_ship(@npc_submarine)
     npc_place_ship(@npc_cruiser)
     prompt_player
     print @player_board.render
     player_place_ship(@player_submarine)
     player_place_ship(@player_cruiser)
+    print @player_board.render
+    until @player_cruiser.sunk? && @player_submarine.sunk? || npc_cruiser.sunk? && npc_submarine.sunk?
+    puts "Enemy fire incoming!!!"
+    sleep(2)
+    npc_fire
+    print @player_board.render
+    puts "Player turn now, awaiting coordinate!"
+    player_fire
+    print @npc_board.render
+    end
+    if @player_cruiser.sunk? && @player_submarine.sunk?
+      puts "Game Over. YOU! LOSE!!!"
+    else
+      puts "COMMANDER! YOU HAVE WON THE BATTLE!!!"
+    end
+    begin_game
+  end
+
+  def player_fire
+    input = gets.chomp.upcase
+    if @npc_board.cells.keys.include?(input)
+      @npc_board.cells[input].fire_upon
+      if @npc_board.cells[input].empty?
+        puts "\nFire again, my liege! You have missed the target."
+      elsif @npc_board.cells[input].ship.sunk?
+        puts "\nYOU HAVE SUNK AN ENEMY SHIP!!!"
+      elsif !@npc_board.cells[input].ship.sunk? && !@npc_board.cells[input].empty?
+        puts "\nYou have struck an enemy ship!"
+      end
+    else
+      puts "Invalid coordinate, Sir."
+      player_fire
+    end
+  end
+
+  def npc_fire
+    random_cell = @player_board.cells.keys.sample
+    until @player_board.cells[random_cell].fired_upon? == false
+      random_cell = @player_board.cells.keys.sample
+    end
+      @player_board.cells[random_cell].fire_upon
+    if @player_board.cells[random_cell].empty?
+      puts "\nThe enemy missed!"
+    elsif @player_board.cells[random_cell].ship.sunk?
+      puts "\nThe enemy sunk your ship!"
+    else
+      puts "\nThe enemy struck your ship!"
+    end
   end
 
   def npc_place_ship(ship)
